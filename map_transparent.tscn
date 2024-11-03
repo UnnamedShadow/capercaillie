@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://f73oppris04j"]
+
+[ext_resource type="PackedScene" uid="uid://xxgsig81isnn" path="res://1ni4-map.glb" id="1_ef5wu"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_m6bh2"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+blend_mode = 1
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.400698, 0.400698, 0.400698, 1)
+
+[node name="A Molecular Scene from Coot" instance=ExtResource("1_ef5wu")]
+
+[node name="Test Export" parent="." index="0"]
+transparency = 0.8
+surface_material_override/0 = SubResource("ORMMaterial3D_m6bh2")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8bgv1nd7sis8"]
+
+[ext_resource type="PackedScene" uid="uid://cvj3s8olwj050" path="res://1ni4-1.glb" id="1_p4aca"]
+
+[node name="views" type="Node3D"]
+
+[node name="A Molecular Scene from Coot" parent="." instance=ExtResource("1_p4aca")]

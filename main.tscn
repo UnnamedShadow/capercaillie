@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://bu6g56k8if68r"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_1pdif"]
+[ext_resource type="PackedScene" uid="uid://c8bgv1nd7sis8" path="res://views.tscn" id="1_2fmoy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n6qke"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fudbq"]
+sky_material = SubResource("ProceduralSkyMaterial_n6qke")
+
+[sub_resource type="Environment" id="Environment_l1uym"]
+background_mode = 2
+sky = SubResource("Sky_fudbq")
+
+[sub_resource type="SphereMesh" id="SphereMesh_eho8e"]
+radius = 0.1
+height = 0.2
+
+[node name="XROrigin3D" type="XROrigin3D"]
+script = ExtResource("1_1pdif")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l1uym")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -15.5
+offset_right = 25.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "enter"
+
+[node name="views" parent="." instance=ExtResource("1_2fmoy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+rotation_edit_mode = 2
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+current = true
+
+[node name="XRController3D_l" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 1)
+tracker = &"/user/hand_tracker/left"
+show_when_tracked = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XRController3D_l"]
+mesh = SubResource("SphereMesh_eho8e")
+
+[node name="XRController3D_r" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1)
+tracker = &"/user/hand_tracker/right"
+show_when_tracked = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XRController3D_r"]
+mesh = SubResource("SphereMesh_eho8e")
+skeleton = NodePath("../../XRController3D_l")
+
+[connection signal="button_pressed" from="XRController3D_r" to="." method="_on_xr_controller_3d_r_button_pressed"]
