@@ -9,4 +9,4 @@ A godot vr molecular graphics program
 - exit the settings window
 - click on the remote debug button(in the top right corner presentation icon)
 - select start http server
-- now you can enter the previously mentioned network address in the oculus browser, accept the risks and view
+- now you can enter the previously mentioned network address in the vr browser, accept the risks and view
